@@ -1,53 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Pizzaria '87</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f4f6f9;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .login-card {
-            max-width: 400px;
-            width: 100%;
-            border: none;
-            border-radius: 1rem;
-        }
-        .brand-badge {
-            width: 64px;
-            height: 64px;
-            background-color: #dc3545;
-            color: #fff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.75rem;
-            margin: 0 auto 1rem auto;
-        }
-    </style>
-</head>
-<body>
+<head th:replace="~{fragments/head :: head('Login')}"></head>
+<body class="p87-theme">
 
-<div class="container px-3">
-    <div class="card shadow-sm login-card mx-auto">
-        <div class="card-body p-4 p-md-5">
-            <div class="text-center mb-4">
-                <div class="brand-badge shadow-sm">
-                    <i class="bi bi-fire"></i>
-                </div>
-                <h1 class="h4 fw-bold mb-1">Pizzaria '87</h1>
-                <p class="text-muted small mb-0">Acesso ao Sistema de Fichas e Pedidos</p>
-            </div>
+<div th:replace="~{fragments/navbar :: topbar(${usuarioLogado})}"></div>
 
-            <!-- Alerta de erro (credenciais inválidas ou usuário inativo) -->
+<div class="container px-3 py-4">
+    <div class="card p87-card mx-auto" style="max-width: 420px;">
+        <div class="card-header text-center">
+            Acesso ao Sistema de Fichas e Pedidos
+        </div>
+        <div class="card-body p-4">
             <div th:if="${erro}" class="alert alert-danger d-flex align-items-center py-2 px-3 small" role="alert">
                 <i class="bi bi-exclamation-triangle-fill me-2"></i>
                 <span th:text="${erro}">Mensagem de erro</span>
@@ -83,10 +46,10 @@
                                placeholder="••••"
                                required>
                     </div>
-                    <div class="form-text">Digite seu PIN numérico de 4 dígitos.</div>
+                    <div class="form-text text-light opacity-75">Digite seu PIN numérico de 4 dígitos.</div>
                 </div>
 
-                <button type="submit" class="btn btn-danger w-100 py-2 fw-semibold">
+                <button type="submit" class="btn p87-btn-primary w-100 py-2">
                     <i class="bi bi-box-arrow-in-right me-1"></i> Entrar
                 </button>
             </form>

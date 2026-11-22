@@ -1,0 +1,92 @@
+:root {
+    --p87-bg-dark: #141115;
+    --p87-card-bg: #1e1820;
+    --p87-red: #c81d25;
+    --p87-gold: #f4b41a;
+    --p87-cream: #fff8eb;
+    --p87-check-dark: #18181b;
+    --p87-check-light: #f4f4f5;
+}
+
+body.p87-theme {
+    background-color: var(--p87-bg-dark);
+    color: var(--p87-cream);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.p87-checker-bar {
+    height: 10px;
+    background-image:
+            linear-gradient(45deg, var(--p87-check-dark) 25%, transparent 25%),
+            linear-gradient(-45deg, var(--p87-check-dark) 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, var(--p87-check-dark) 75%),
+            linear-gradient(-45deg, transparent 75%, var(--p87-check-dark) 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+    background-color: var(--p87-check-light);
+}
+
+.p87-navbar {
+    background-color: var(--p87-card-bg) !important;
+    border-bottom: 3px solid var(--p87-gold);
+}
+
+.p87-logo-img {
+    height: 44px;
+    width: auto;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+}
+
+.p87-card {
+    background-color: var(--p87-card-bg);
+    color: var(--p87-cream);
+    border: 2px solid var(--p87-gold);
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+}
+
+.p87-card .card-header {
+    background-color: rgba(200, 29, 37, 0.22);
+    color: var(--p87-gold);
+    border-bottom: 1px solid rgba(244, 180, 26, 0.35);
+    font-weight: 700;
+}
+
+.p87-card .form-control,
+.p87-card .form-select {
+    background-color: #2a222d;
+    color: var(--p87-cream);
+    border-color: #4a3d4f;
+}
+
+.p87-card .form-control:focus,
+.p87-card .form-select:focus {
+    background-color: #2f2633;
+    color: var(--p87-cream);
+    border-color: var(--p87-gold);
+    box-shadow: 0 0 0 0.2rem rgba(244, 180, 26, 0.25);
+}
+
+.p87-btn-primary {
+    background-color: var(--p87-red);
+    border-color: var(--p87-gold);
+    color: var(--p87-cream);
+    font-weight: 700;
+}
+
+.p87-btn-primary:hover {
+    background-color: #a5151c;
+    border-color: var(--p87-gold);
+    color: #ffffff;
+}
+
+.p87-table {
+    color: var(--p87-cream);
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--p87-cream);
+    --bs-table-hover-bg: rgba(244, 180, 26, 0.08);
+    --bs-table-hover-color: var(--p87-cream);
+    --bs-table-border-color: rgba(244, 180, 26, 0.2);
+}
