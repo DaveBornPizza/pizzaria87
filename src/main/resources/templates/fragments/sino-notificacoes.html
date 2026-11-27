@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<body>
+<!--
+    Sino de notificações do garçom.
+    Depende do atributo de modelo "sino" (NotificacaoGarcomService.Sino) e de "uriAtual",
+    ambos preenchidos por SinoNotificacoesAdvice nas telas do pacote controller/garcom.
+-->
+<div th:fragment="sino" class="dropdown p87-sino">
+    <button class="btn btn-outline-light btn-sm position-relative"
+            type="button"
+            data-bs-toggle="dropdown"
+            data-bs-display="static"
+            data-bs-auto-close="outside"
+            aria-expanded="false"
+            th:attr="aria-label=${'Notificações: ' + sino.totalNaoLidas + ' não lida(s)'}">
+        <i class="bi" th:classappend="${sino.totalNaoLidas > 0} ? 'bi-bell-fill' : 'bi-bell'"></i>
+        <span th:if="${sino.totalNaoLidas > 0}"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              th:text="${sino.totalNaoLidas > 99} ? '99+' : ${sino.totalNaoLidas}">2</span>
+    </button>
+
+    <div class="dropdown-menu dropdown-menu-end dropdown-menu-dark p87-sino-menu shadow">
+        <div class="d-flex justify-content-between align-items-center px-3 pb-2 border-bottom border-secondary">
+            <strong class="text-warning">Notificações</strong>
+            <form th:if="${sino.totalNaoLidas > 0}" th:action="@{/garcom/notificacoes/lidas}" method="post" class="m-0">
+                <input type="hidden" name="voltar" th:value="${uriAtual}">
+                <button type="submit" class="btn btn-link btn-sm p-0 text-light text-decoration-none">
+                    <i class="bi bi-check2-all me-1"></i>Marcar todas
+                </button>
+            </form>
+        </div>
+
+        <div th:if="${#lists.isEmpty(sino.naoLidas)}" class="px-3 py-3 small text-light opacity-75">
+            Nenhuma notificação nova.
+        </div>
+
+        <div th:each="n : ${sino.naoLidas}" class="p87-sino-item px-3 py-2 border-bottom border-secondary">
+            <div class="d-flex gap-2">
+                <i th:if="${n.tipo == 'PEDIDO_PRONTO'}" class="bi bi-check-circle-fill text-success fs-5"></i>
+                <i th:if="${n.tipo == 'FALTA_INGREDIENTE'}" class="bi bi-exclamation-triangle-fill text-warning fs-5"></i>
+                <i th:if="${n.tipo != 'PEDIDO_PRONTO' and n.tipo != 'FALTA_INGREDIENTE'}" class="bi bi-info-circle-fill text-info fs-5"></i>
+                <div class="flex-grow-1">
+                    <div class="fw-semibold small">
+                        <span th:if="${n.tipo == 'PEDIDO_PRONTO'}">Pedido pronto</span>
+                        <span th:if="${n.tipo == 'FALTA_INGREDIENTE'}">Falta de ingrediente</span>
+                        <span th:if="${n.tipo != 'PEDIDO_PRONTO' and n.tipo != 'FALTA_INGREDIENTE'}" th:text="${n.tipo}">Aviso</span>
+                        <span th:if="${n.pedido != null}" class="text-light opacity-75"
+                              th:text="${' · Pedido #' + n.pedido.id + (n.pedido.atendimento != null ? ' · Ficha ' + n.pedido.atendimento.ficha.numeroFicha : '')}">
+                            · Pedido #14 · Ficha 01
+                        </span>
+                    </div>
+                    <div class="small" th:text="${n.mensagem}">Retirar na cozinha</div>
+                    <div class="d-flex justify-content-between align-items-center mt-1">
+                        <small class="text-light opacity-50" th:text="${#temporals.format(n.dataHora, 'dd/MM HH:mm')}">12:32</small>
+                        <form th:action="@{/garcom/notificacoes/{id}/lida(id=${n.id})}" method="post" class="m-0">
+                            <input type="hidden" name="voltar" th:value="${uriAtual}">
+                            <button type="submit" class="btn btn-outline-light btn-sm py-0">
+                                <i class="bi bi-check2 me-1"></i>Marcar como lida
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <th:block th:if="${not #lists.isEmpty(sino.lidasRecentes)}">
+            <div class="px-3 pt-2 pb-1 small text-uppercase text-light opacity-50">Lidas recentemente</div>
+            <div th:each="n : ${sino.lidasRecentes}" class="px-3 py-1 small text-light opacity-50">
+                <i class="bi bi-check2 me-1"></i>
+                <span th:text="${n.mensagem}">Mensagem</span>
+                <span th:text="${' · ' + #temporals.format(n.dataHora, 'HH:mm')}"> · 12:05</span>
+            </div>
+        </th:block>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,194 @@
+/* Estilos das telas do garçom (salão). Complementa pizzaria87.css sem alterá-lo. */
+
+/* ---------- Grade de fichas ---------- */
+.p87-ficha {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 120px;
+    padding: 0.75rem 0.5rem;
+    background-color: #271f2a;
+    color: var(--p87-cream);
+    border: 2px solid #4a3d4f;
+    border-radius: 14px;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 0.08s ease, filter 0.08s ease;
+}
+
+.p87-ficha-numero {
+    font-size: 1.9rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.p87-ficha-info {
+    font-size: 0.8rem;
+    opacity: 0.85;
+    margin-top: 0.35rem;
+}
+
+a.p87-ficha:hover,
+button.p87-ficha:hover {
+    color: var(--p87-cream);
+    filter: brightness(1.15);
+    transform: translateY(-1px);
+}
+
+a.p87-ficha:active,
+button.p87-ficha:active {
+    transform: scale(0.98);
+}
+
+.p87-ficha-livre {
+    border-color: #198754;
+}
+
+.p87-ficha-ocupada {
+    border-color: var(--p87-gold);
+    background-color: #2f2519;
+}
+
+.p87-ficha-desativada {
+    border-style: dashed;
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* ---------- Filtros ---------- */
+.p87-filtros {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+    -webkit-overflow-scrolling: touch;
+}
+
+.p87-filtros .btn {
+    white-space: nowrap;
+}
+
+.p87-busca {
+    max-width: 220px;
+}
+
+.p87-busca .form-control,
+.p87-theme .modal-content .form-control {
+    background-color: #2a222d;
+    color: var(--p87-cream);
+    border-color: #4a3d4f;
+}
+
+/* ---------- Modais ---------- */
+.p87-theme .modal-content {
+    background-color: var(--p87-card-bg);
+    color: var(--p87-cream);
+    border: 2px solid var(--p87-gold);
+    border-radius: 14px;
+}
+
+.p87-theme .modal-header,
+.p87-theme .modal-footer {
+    border-color: rgba(244, 180, 26, 0.35);
+}
+
+/* ---------- Pedidos ---------- */
+.p87-pedido-cancelado {
+    opacity: 0.5;
+}
+
+.p87-pedido-cancelado .p87-pedido-itens {
+    text-decoration: line-through;
+}
+
+.p87-item-linha {
+    border-bottom: 1px solid rgba(244, 180, 26, 0.15);
+}
+
+.p87-item-linha:last-child {
+    border-bottom: 0;
+}
+
+.p87-qtd {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.p87-qtd .form-control {
+    width: 4rem;
+    text-align: center;
+    background-color: #2a222d;
+    color: var(--p87-cream);
+    border-color: #4a3d4f;
+}
+
+.p87-qtd .btn {
+    min-width: 2.5rem;
+}
+
+.p87-obs {
+    background-color: #2a222d !important;
+    color: var(--p87-cream) !important;
+    border-color: #4a3d4f !important;
+}
+
+.p87-obs::placeholder {
+    color: rgba(255, 248, 235, 0.45);
+}
+
+.p87-categorias {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background-color: var(--p87-bg-dark);
+}
+
+/* Barra fixa inferior (total + ação principal) – confortável no celular */
+.p87-barra-inferior {
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    background-color: var(--p87-card-bg);
+    border-top: 2px solid var(--p87-gold);
+    padding: 0.75rem 1rem;
+    margin: 1rem -0.75rem 0;
+    box-shadow: 0 -8px 18px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- Extrato ---------- */
+.p87-total {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--p87-gold);
+}
+
+/* ---------- Sino ---------- */
+.p87-sino-menu {
+    width: min(360px, 92vw);
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-top: 0.5rem;
+}
+
+.p87-sino-item:last-child {
+    border-bottom: 0 !important;
+}
+
+/* No celular o cabeçalho quebra linha e o sino fica à esquerda:
+   o menu ocupa a largura da tela, logo abaixo do cabeçalho. */
+@media (max-width: 575.98px) {
+    .p87-sino-menu[data-bs-popper] {
+        position: fixed;
+        top: 110px;
+        left: 4vw !important;
+        right: 4vw !important;
+        width: auto;
+    }
+}
+
+.p87-busca .form-control::placeholder {
+    color: rgba(255, 248, 235, 0.5);
+}
